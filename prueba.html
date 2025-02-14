@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8c8dc;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            text-align: left;
+            max-width: 700px;
+            position: relative;
+            z-index: 10;
+        }
+        .text {
+            flex: 1;
+            padding-right: 30px;
+            word-wrap: break-word;
+            font-size: 1.2em;
+        }
+        img {
+            width: 150px;
+            height: auto;
+        }
+        /* Animación de los corazones */
+        .heart {
+            position: fixed;
+            bottom: 0;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: floatHearts 5s ease-in;
+            pointer-events: none;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .heart::before {
+            left: 0;
+            top: -15px;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 15px;
+        }
+
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="text">
+            <h1>🎉 ¡Feliz día mi princesa! 🎂</h1>
+            <p>La distancia nos separa, pero nuestro cariño nos une más fuerte que nunca </p>
+            <p>Significas mucho para mi te has vuelto alguien muy especial en mi vida y cada momento a tu lado lo valoro muchísimo. 
+                No sé qué nos tenga preparado el futuro, pero lo que sí sé es que me encanta conocerte más y compartir todo esto contigo.</p>
+        </div>
+        <img src="imga.jpg" alt="Pastel de cumpleaños">
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Posicionamos el corazón de forma aleatoria en la parte inferior
+            heart.style.left = `${Math.random() * 100}vw`;  // Aleatorio en el eje X
+            heart.style.bottom = "0";
+            heart.style.animationDuration = `${Math.random() * 5 + 3}s`;  // Duración aleatoria de la animación
+
+            document.body.appendChild(heart);
+
+            // Eliminamos el corazón después de que se haya animado
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
